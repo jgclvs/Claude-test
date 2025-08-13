@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 
-# Get API key from environment variable or fallback to default (for testing only)
-GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', 'AIzaSyAFSUjAJ3lSeuQeMt_YQt-wvIpFjDvN6sw')
+# Get API key from environment variable only (no default)
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 # Data directory
 DATA_DIR = Path("my_notes")

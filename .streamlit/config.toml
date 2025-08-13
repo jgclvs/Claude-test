@@ -1,0 +1,5 @@
+[general]
+email = "jo6.mua@gmail.com"
+
+[browser]
+gatherUsageStats = false
