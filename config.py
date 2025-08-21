@@ -1,6 +1,14 @@
 import os
 from pathlib import Path
 
+# Load environment variables from .env file
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    # dotenv not installed, skip loading .env file
+    pass
+
 # Get API key from environment variable only (no default)
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 

@@ -8,5 +8,33 @@
     "title": "\"Pasta Recipe\"",
     "content": "\"Boil water, add salt, cook pasta 8-10 minutes, drain, add sauce\"",
     "created": "2025-08-07T21:05:34.692036"
+  },
+  "note_7d32d3f6": {
+    "title": "asf",
+    "content": "asfasfa",
+    "created": "2025-08-17T22:40:49.414245",
+    "updated": "2025-08-17T22:40:49.414245",
+    "tags": [
+      "afs"
+    ]
+  },
+  "note_99a1cd62": {
+    "title": "Test Note",
+    "content": "This is a test note to verify the application is working",
+    "created": "2025-08-21T17:28:56.622616",
+    "updated": "2025-08-21T17:28:56.622616",
+    "tags": [
+      "test",
+      "demo"
+    ]
+  },
+  "note_5b4a4b13": {
+    "title": "RANDOM",
+    "content": "IS IT WORKING",
+    "created": "2025-08-21T17:34:00.489742",
+    "updated": "2025-08-21T17:34:00.489742",
+    "tags": [
+      "SURELY HOPE SO"
+    ]
   }
 }

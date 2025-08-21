@@ -103,7 +103,8 @@ class SmartNotes:
         
         for note_id, note in filtered_notes:
             created = datetime.fromisoformat(note["created"]).strftime("%Y-%m-%d %H:%M")
-            updated = datetime.fromisoformat(note["updated"]).strftime("%Y-%m-%d %H:%M")
+            updated_str = note.get("updated", note["created"])  # fallback to created if updated missing
+            updated = datetime.fromisoformat(updated_str).strftime("%Y-%m-%d %H:%M")
             tags = ", ".join(note.get("tags", []))
             
             print(f"ID: {note_id}")

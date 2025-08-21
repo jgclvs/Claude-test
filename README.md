@@ -26,17 +26,18 @@ A powerful note-taking application with AI assistance, featuring both a command-
    pip install -r requirements.txt
    ```
 
-3. Set up your Gemini API key (optional but recommended):
+3. Set up your Gemini API key:
    ```bash
-   # On Windows (Command Prompt)
-   set GEMINI_API_KEY=your_api_key_here
+   # Copy the example environment file
+   cp .env.example .env
    
-   # On Windows (PowerShell)
-   $env:GEMINI_API_KEY="your_api_key_here"
-   
-   # On macOS/Linux
-   export GEMINI_API_KEY=your_api_key_here
+   # Edit .env and add your actual API key
+   # Get your key from: https://aistudio.google.com/app/apikey
    ```
+   
+   Edit the `.env` file and replace `your_gemini_api_key_here` with your actual API key.
+
+   **🔒 Security Note**: Never commit the `.env` file to Git. It's already in `.gitignore` to protect your API key.
 
 ## 🖥️ Usage
 
@@ -85,7 +86,17 @@ python notes_enhanced.py ask --relevant-only "What did I learn about Python?"
 
 ## 🔒 Security
 
-For production use, always set your Gemini API key as an environment variable rather than using the hardcoded test key.
+**✅ Your setup is secure!** The application uses environment variables to protect your API key:
+
+- ✅ API key stored in `.env` file (not in source code)
+- ✅ `.env` file is in `.gitignore` (won't be committed to Git)
+- ✅ Uses `python-dotenv` for secure environment loading
+
+**Important Security Practices:**
+- Never share your `.env` file
+- Never commit API keys to version control
+- Regenerate your API key if accidentally exposed
+- Use `.env.example` as a template for new setups
 
 ## 🤖 AI Features
 

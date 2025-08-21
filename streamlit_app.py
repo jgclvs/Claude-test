@@ -23,7 +23,7 @@ if 'current_view' not in st.session_state:
     st.session_state.current_view = 'dashboard'
 
 # Custom CSS
-st.markdown(\"\"\"
+st.markdown("""
 <style>
     .main-header {
         font-size: 2.5rem;
@@ -64,7 +64,7 @@ st.markdown(\"\"\"
         margin: 1rem 0;
     }
 </style>
-\"\"\", unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 # Header
 st.markdown("<h1 class='main-header'>📝 Smart Notes AI</h1>", unsafe_allow_html=True)
@@ -131,21 +131,19 @@ if st.session_state.current_view == 'dashboard':
         # Display notes
         for note_id, note in filtered_notes.items():
             created = datetime.fromisoformat(note["created"]).strftime("%Y-%m-%d %H:%M")
-            updated = datetime.fromisoformat(note["updated"]).strftime("%Y-%m-%d %H:%M")
-            
+            updated_str = note.get("updated", note["created"])  # fallback to created if updated missing
+            updated = datetime.fromisoformat(updated_str).strftime("%Y-%m-%d %H:%M")
             with st.container():
-                st.markdown(f\"\"\"
-                <div class="note-card">
-                    <h3>{note['title']}</h3>
-                    <p><strong>ID:</strong> {note_id} | <strong>Created:</strong> {created} | <strong>Updated:</strong> {updated}</p>
-                \"\"\", unsafe_allow_html=True)
-                
+                st.markdown(f"""
+<div class="note-card">
+    <h3>{note['title']}</h3>
+    <p><strong>ID:</strong> {note_id} | <strong>Created:</strong> {created} | <strong>Updated:</strong> {updated}</p>
+</div>
+""", unsafe_allow_html=True)
                 if note.get("tags"):
                     tags_html = "".join([f"<span class='tag'>{tag}</span>" for tag in note["tags"]])
                     st.markdown(f"<p><strong>Tags:</strong> {tags_html}</p>", unsafe_allow_html=True)
-                
                 st.markdown(f"<p><strong>Content:</strong> {note['content']}</p>", unsafe_allow_html=True)
-                
                 col1, col2, col3 = st.columns(3)
                 with col1:
                     if st.button("✏️ Edit", key=f"edit_{note_id}"):
@@ -159,8 +157,6 @@ if st.session_state.current_view == 'dashboard':
                     if st.button("🧠 Ask AI", key=f"ai_{note_id}"):
                         st.session_state.ai_question = f"Tell me more about this note: {note['title']}"
                         st.session_state.current_view = 'ask_ai'
-                
-                st.markdown("</div>", unsafe_allow_html=True)
                 st.markdown("---")
         
         # Delete confirmation
@@ -171,10 +167,10 @@ if st.session_state.current_view == 'dashboard':
                 if st.button("Yes, delete"):
                     st.session_state.notes_app.delete_note(note_id)
                     st.session_state.show_delete_confirm = False
-                    st.experimental_rerun()
+                    st.rerun()
                 if st.button("Cancel"):
                     st.session_state.show_delete_confirm = False
-                    st.experimental_rerun()
+                    st.rerun()
 
 # Add Note View
 elif st.session_state.current_view == 'add_note':
@@ -197,7 +193,7 @@ elif st.session_state.current_view == 'add_note':
                 st.session_state.notes_app.add_note(title, content, tag_list)
                 st.success("Note saved successfully!")
                 st.session_state.current_view = 'dashboard'
-                st.experimental_rerun()
+                st.rerun()
 
 # Edit Note View
 elif st.session_state.current_view == 'edit_note':
@@ -210,7 +206,7 @@ elif st.session_state.current_view == 'edit_note':
         st.error("Note not found")
         if st.button("Back to Dashboard"):
             st.session_state.current_view = 'dashboard'
-            st.experimental_rerun()
+            st.rerun()
     else:
         with st.form("edit_note_form"):
             title = st.text_input("Title", value=note.get('title', ''))
@@ -222,18 +218,18 @@ elif st.session_state.current_view == 'edit_note':
             if submitted:
                 if not title:
                     st.error("Title cannot be empty")
-                elif not content.strip():
+                elif not content or not content.strip():
                     st.error("Content cannot be empty")
                 else:
                     tag_list = [tag.strip() for tag in tags.split(",") if tag.strip()]
                     st.session_state.notes_app.update_note(note_id, title, content, tag_list)
                     st.success("Note updated successfully!")
                     st.session_state.current_view = 'dashboard'
-                    st.experimental_rerun()
+                    st.rerun()
         
         if st.button("Cancel"):
             st.session_state.current_view = 'dashboard'
-            st.experimental_rerun()
+            st.rerun()
 
 # Search Notes View
 elif st.session_state.current_view == 'search_notes':
@@ -255,21 +251,19 @@ elif st.session_state.current_view == 'search_notes':
             st.write(f"Found {len(matches)} matches:")
             for note_id, note in matches:
                 created = datetime.fromisoformat(note["created"]).strftime("%Y-%m-%d %H:%M")
-                updated = datetime.fromisoformat(note["updated"]).strftime("%Y-%m-%d %H:%M")
-                
+                updated_str = note.get("updated", note["created"])  # fallback to created if updated missing
+                updated = datetime.fromisoformat(updated_str).strftime("%Y-%m-%d %H:%M")
                 with st.container():
-                    st.markdown(f\"\"\"
-                    <div class="note-card">
-                        <h3>{note['title']}</h3>
-                        <p><strong>ID:</strong> {note_id} | <strong>Created:</strong> {created} | <strong>Updated:</strong> {updated}</p>
-                    \"\"\", unsafe_allow_html=True)
-                    
+                    st.markdown(f"""
+<div class="note-card">
+    <h3>{note['title']}</h3>
+    <p><strong>ID:</strong> {note_id} | <strong>Created:</strong> {created} | <strong>Updated:</strong> {updated}</p>
+</div>
+""", unsafe_allow_html=True)
                     if note.get("tags"):
                         tags_html = "".join([f"<span class='tag'>{tag}</span>" for tag in note["tags"]])
                         st.markdown(f"<p><strong>Tags:</strong> {tags_html}</p>", unsafe_allow_html=True)
-                    
                     st.markdown(f"<p><strong>Content:</strong> {note['content']}</p>", unsafe_allow_html=True)
-                    st.markdown("</div>", unsafe_allow_html=True)
                     st.markdown("---")
         else:
             st.info("No matches found")
@@ -288,7 +282,7 @@ elif st.session_state.current_view == 'ask_ai':
     with col2:
         if st.button("Clear"):
             st.session_state.ai_question = ""
-            st.experimental_rerun()
+            st.rerun()
     
     if st.button("Ask AI") or default_question:
         if not question:
@@ -298,25 +292,25 @@ elif st.session_state.current_view == 'ask_ai':
             with st.spinner("🤖 AI is thinking..."):
                 # Make API call to Gemini
                 api_key = GEMINI_API_KEY
-                
+
                 if use_relevant_only:
                     # Find only relevant notes for the question
                     relevant_notes = st.session_state.notes_app.find_relevant_notes(question, api_key)
                     if relevant_notes:
-                        notes_context = "Relevant Notes:\\n\\n"
+                        notes_context = "Relevant Notes:\n\n"
                         for note_id, note in relevant_notes:
-                            notes_context += f"ID: {note_id}\\n"
-                            notes_context += f"Title: {note['title']}\\n"
+                            notes_context += f"ID: {note_id}\n"
+                            notes_context += f"Title: {note['title']}\n"
                             if note.get("tags"):
-                                notes_context += f"Tags: {', '.join(note['tags'])}\\n"
-                            notes_context += f"Content: {note['content']}\\n\\n"
+                                notes_context += f"Tags: {', '.join(note['tags'])}\n"
+                            notes_context += f"Content: {note['content']}\n\n"
                     else:
                         notes_context = "No relevant notes found."
                 else:
                     # Use all notes
                     notes_context = st.session_state.notes_app.get_all_content()
-                
-                prompt = f\"\"\"Based on these notes, analyze the question and respond with JSON in this exact format:
+
+                prompt = f"""Based on these notes, analyze the question and respond with JSON in this exact format:
 {{
   "answer": "your detailed answer here",
   "confidence": 0.85,
@@ -328,7 +322,8 @@ elif st.session_state.current_view == 'ask_ai':
 Notes: {notes_context}
 Question: {question}
 
-Respond ONLY with valid JSON, no other text.\"\"\"
+Respond ONLY with valid JSON, no other text.
+"""
 
                 try:
                     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
@@ -395,3 +390,4 @@ Respond ONLY with valid JSON, no other text.\"\"\"
 # Footer
 st.markdown("---")
 st.caption("Smart Notes AI - Powered by Google Gemini & Streamlit")
+
