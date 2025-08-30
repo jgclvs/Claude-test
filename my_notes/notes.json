@@ -36,5 +36,68 @@
     "tags": [
       "SURELY HOPE SO"
     ]
+  },
+  "note_21e38f0f": {
+    "title": "princess",
+    "content": "she is my wife",
+    "created": "2025-08-21T17:49:58.717055",
+    "updated": "2025-08-21T17:49:58.717055",
+    "tags": [
+      "bomb"
+    ]
+  },
+  "note_53cf33a7": {
+    "title": "Morning Motivation",
+    "content": "Started the day with meditation and feel really energized. My morning routine is helping me stay focused and positive. Grateful for this peaceful start.",
+    "created": "2025-08-29T15:49:06.741689",
+    "updated": "2025-08-29T15:49:06.741689",
+    "tags": [
+      "morning",
+      "routine"
+    ],
+    "type": "journal",
+    "metadata": {
+      "mood": 8,
+      "energy_level": 9,
+      "word_count": 24,
+      "created_date_only": "2025-08-29",
+      "created_hour": 15
+    }
+  },
+  "note_ed2d1944": {
+    "title": "Work Stress Challenge",
+    "content": "Dealing with a difficult project deadline. Feeling overwhelmed but trying to break tasks into smaller pieces. Need to communicate better with my team.",
+    "created": "2025-08-29T15:49:06.742688",
+    "updated": "2025-08-29T15:49:06.742688",
+    "tags": [
+      "work",
+      "stress"
+    ],
+    "type": "reflection",
+    "metadata": {
+      "mood": 4,
+      "energy_level": 3,
+      "word_count": 23,
+      "created_date_only": "2025-08-29",
+      "created_hour": 15
+    }
+  },
+  "note_d9f29795": {
+    "title": "Growth Mindset Principle",
+    "content": "I believe challenges are opportunities to learn. When facing difficulties, I try to see them as chances to grow rather than obstacles.",
+    "created": "2025-08-29T15:49:06.743687",
+    "updated": "2025-08-29T15:49:06.743687",
+    "tags": [
+      "mindset",
+      "growth"
+    ],
+    "type": "principle",
+    "metadata": {
+      "mood": 7,
+      "energy_level": 7,
+      "word_count": 22,
+      "created_date_only": "2025-08-29",
+      "created_hour": 15
+    }
   }
 }
